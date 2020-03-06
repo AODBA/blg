@@ -31,28 +31,30 @@ aws s3 mb s3://$my_bucket_name --profile $aws_profile_name --region $aws_region_
 
 ### 3 - Edit the policy docs to reflect you bucket name
 ```
-cp -r /opt/blg/policy /opt/blg/policy_$today
-cd /opt/blg/policy_$today
+cp -r /opt/blg/code/policy /opt/blg/code/policy_$today
+cd /opt/blg/code/policy_$today
 sed -i s/REPLACE_BKT_NAME/$my_bucket_name/g *.json
 ```
 
 ### 4 - Create an IAM policy
 ```
-aws iam create-policy --policy-name $crawler_name-policy --policy-document file:///opt/blg/policy_$today/policy-document.json --profile $aws_profile_name --region $aws_region_name
+aws iam create-policy --policy-name $crawler_name-policy --policy-document file:///opt/blg/code/policy_$today/policy-document.json --profile $aws_profile_name --region $aws_region_name
 ```
 ### 5 - Create an IAM Role
 ```
-aws iam create-role --role-name $crawler_name-role --assume-role-policy-document file:///opt/blg/policy_$today/role-policy.json --profile $aws_profile_name --region $aws_region_name
+aws iam create-role --role-name $crawler_name-role --assume-role-policy-document file:///opt/blg/code/policy_$today/role-policy.json --profile $aws_profile_name --region $aws_region_name
 ```
 ### 6 Attach Role Policy
 ```
 export arn=$(aws iam list-policies --query 'Policies[?PolicyName==`'$crawler_name-policy'`].Arn' --profile $aws_profile_name --region $aws_region_name --output text)
 aws iam attach-role-policy --role-name $crawler_name-role --policy-arn $arn --profile $aws_profile_name --region $aws_region_name
+export service_arn=$(aws iam list-policies --query 'Policies[?PolicyName==`AWSGlueServiceRole`].Arn' --profile $aws_profile_name --region $aws_region_name --output text)
+aws iam attach-role-policy --role-name $crawler_name-role --policy-arn $service_arn --profile $aws_profile_name --region $aws_region_name
 ```
 
 ### 7 Create AWS Glue Crawler
 ```
-aws glue create-crawler --name $crawler_name --role $crawler_name-role --database-name $crawler_name-db --targets '{"S3Targets": [{"Path": "s3://'$my_bucket_name'/","Exclusions": []}],"JdbcTargets": [],"DynamoDBTargets": [],"CatalogTargets": []}'  --description 'my '$crawler_name' desc' --table-prefix $crawler_name_ --profile $aws_profile_name --region $aws_region_name
+aws glue create-crawler --name $crawler_name --role $crawler_name-role --database-name $crawler_name-db --targets '{"S3Targets": [{"Path": "s3://'$my_bucket_name'/","Exclusions": []}],"JdbcTargets": [],"DynamoDBTargets": [],"CatalogTargets": []}'  --description 'my '$crawler_name' desc' --table-prefix tbl_prefix__ --profile $aws_profile_name --region $aws_region_name
 ```
 
 ### 8 Download / Upload data to S3
