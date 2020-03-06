@@ -4,7 +4,7 @@
 Note:
 - you need to have an aws account and need to setup a profile on your local aws cli 
 
-###Setup:
+### Setup:
 - clone the repo to you box.
 
 ```
