@@ -84,13 +84,13 @@ SELECT sum(a.hourly_counts) AS Day_Count,
          a.year,
          a.month,
          a.mdate
-FROM "'$crawler_name'-db"."my_prefix_history" a
-JOIN "'$crawler_name'-db"."my_prefix_sensorlocations" b
+FROM "'$crawler_name'-db"."tbl_prefix_history" a
+JOIN "'$crawler_name'-db"."tbl_prefix_sensorlocations" b
     ON a.sensor_id = b.sensor_id
 GROUP BY  a.sensor_id, b.sensor_name, b.sensor_description,a.year,a.month,a.mdate
 ORDER BY  Day_Count DESC limit 10;
 ' --result-configuration OutputLocation='s3://athena-output-ao/top10-day/' --profile $aws_profile_name --region $aws_region_name --output text`
-
+sleep 10
 # Download the ResultSet from S3
 aws s3 cp s3://athena-output-ao/top10-day/$top10day.csv top10day.csv  --profile $aws_profile_name --region $aws_region_name
 # View the Result
@@ -106,15 +106,16 @@ SELECT sum(a.hourly_counts) AS Month_Count,
          b.sensor_description,
          a.year,
          a.month
-FROM "'$crawler_name'-db"."my_prefix_history" a
-JOIN "'$crawler_name'-db"."my_prefix_sensorlocations" b
+FROM "'$crawler_name'-db"."tbl_prefix_history" a
+JOIN "'$crawler_name'-db"."tbl_prefix_sensorlocations" b
     ON a.sensor_id = b.sensor_id
 GROUP BY  a.sensor_id, b.sensor_name, b.sensor_description,a.year,a.month
 ORDER BY  Month_Count DESC limit 10;
 ' --result-configuration OutputLocation='s3://athena-output-ao/top10-month/' --profile $aws_profile_name --region $aws_region_name --output text`
-
+sleep 10
 aws s3 cp s3://athena-output-ao/top10-month/$top10month.csv top10month.csv --profile $aws_profile_name --region $aws_region_name
 
 cat top10month.csv
+
 ```
 
