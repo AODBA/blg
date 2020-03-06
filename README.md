@@ -4,6 +4,14 @@
 Note:
 - you need to have an aws account and need to setup a profile on your local aws cli 
 
+###Setup:
+- clone the repo to you box.
+
+```
+cd /opt/
+git clone https://github.com/AODBA/blg.git
+```
+
 
 ### 1 - We start by setting some variables, this values will be used in the scripts to follow
 ```
