@@ -8,7 +8,7 @@
                 "s3:PutObject"
             ],
             "Resource": [
-                "arn:aws:s3:::REPLACE_BKT_NAME"
+                "arn:aws:s3:::REPLACE_BKT_NAME/*"
             ]
         }
     ]
