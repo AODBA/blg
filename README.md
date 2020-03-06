@@ -1,7 +1,9 @@
 
 ## Generate Report from Data using AWS Cli + S3 + Athena 
 
-Note:
+### Arch:
+![Arch](https://github.com/AODBA/blg/blob/master/blg.PNG)
+#### Note:
 - you need to have an aws account and need to setup a profile on your local aws cli 
 
 ### Setup:
