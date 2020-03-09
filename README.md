@@ -83,11 +83,11 @@ SELECT sum(a.hourly_counts) AS Day_Count,
          b.sensor_description,
          a.year,
          a.month,
-         a.mdate
+         a.day
 FROM "'$crawler_name'-db"."tbl_prefix_history" a
 JOIN "'$crawler_name'-db"."tbl_prefix_sensorlocations" b
     ON a.sensor_id = b.sensor_id
-GROUP BY  a.sensor_id, b.sensor_name, b.sensor_description,a.year,a.month,a.mdate
+GROUP BY  a.sensor_id, b.sensor_name, b.sensor_description,a.year,a.month,a.day
 ORDER BY  Day_Count DESC limit 10;
 ' --result-configuration OutputLocation='s3://athena-output-ao/top10-day/' --profile $aws_profile_name --region $aws_region_name --output text`
 sleep 10
