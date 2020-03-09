@@ -1,4 +1,8 @@
+# Option 1
+## Use Panadas running in Jupiter Notebook
+![Jupiter Notebook](https://github.com/AODBA/blg/blob/master/blg.PNG)
 
+# Option 2 
 ## Generate Report from Data using AWS Cli + S3 + Athena 
 
 ### Arch:
