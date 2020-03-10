@@ -1,6 +1,6 @@
 # Option 1
 ### Use Panadas running in Jupiter Notebook
-- this would be the POC approach.
+- this would be the POC approach.(Quick)
 
 [Jupiter Notebook](https://github.com/AODBA/blg/blob/master/blgGetData-Pandas.ipynb)
 
