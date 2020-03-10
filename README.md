@@ -5,7 +5,7 @@
 [Jupiter Notebook](https://github.com/AODBA/blg/blob/master/blgGetData-Pandas.ipynb)
 
 # Option 2 
-- this approach would 
+- this approach would not require a Jupiter notebook setup or any pandas module knowledge.
 ## Generate Report from Data using AWS Cli + S3 + Athena 
 
 ### Arch:
