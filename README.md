@@ -1,8 +1,11 @@
 # Option 1
-## Use Panadas running in Jupiter Notebook
+### Use Panadas running in Jupiter Notebook
+- this would be the POC approach.
+
 [Jupiter Notebook](https://github.com/AODBA/blg/blob/master/blgGetData-Pandas.ipynb)
 
 # Option 2 
+- this approach would 
 ## Generate Report from Data using AWS Cli + S3 + Athena 
 
 ### Arch:
